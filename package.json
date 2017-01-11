@@ -1,0 +1,24 @@
+{
+  "name": "SoundBox",
+  "version": "1.0.0",
+  "description": "Website that lets you listen to new music.",
+  "main": "default.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "spotify-web-api-node": "^2.3.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+    "start": "node .",
+    "watch": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thienmdoan/SoundBox/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

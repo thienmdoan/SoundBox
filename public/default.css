@@ -1,0 +1,23 @@
+body {
+  position: relative;
+  font-family: Arial;
+  background-color: rgb(255,192,170);
+}
+
+#title {
+  font-size: 4em;
+  text-align: center;
+}
+
+#searchbar {
+  font-size: 28px;
+  text-align: center;
+}
+
+#submit {
+  font-size: 20px;
+}
+
+#city {
+  font-size: 20px;
+}
