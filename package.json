@@ -2,8 +2,9 @@
   "name": "SoundBox",
   "version": "1.0.0",
   "description": "Website that lets you listen to new music.",
-  "main": "default.js",
+  "main": "node.js",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "spotify-web-api-node": "^2.3.6"
   },
