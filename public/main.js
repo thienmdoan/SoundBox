@@ -1,3 +1,35 @@
+
+//Function to create DOM elements for artist data.
+
+var showResults = (results) => {
+  var resSearch = document.getElementById('list');
+  for (let i = 0; i < results.length; i++) {
+    var obj = results[i];
+    var $artist = document.createElement('div');
+    var $name = document.createElement('p');
+    var $popularity = document.createElement('p');
+    var $genres = document.createElement('p');
+    var $img = document.createElement('img');
+
+    $name.textContent = 'Artist : ' + obj.name;
+    $popularity.textContent = 'Popularity: ' + obj.popularity;
+    $genres.textContent = 'Genre: ' + obj.genres[0];
+
+    $artist.setAttribute('class', 'artistInfo');
+    $name.setAttribute('id', 'artistDeets');
+    $img.setAttribute('src', obj.images[i].url);
+    $img.setAttribute('class', 'artistImg');
+
+    $artist.appendChild($img);
+    $artist.appendChild($name);
+    $name.appendChild($popularity);
+    $name.appendChild($genres);
+    resSearch.appendChild($artist);
+  }
+  return results;
+};
+
+//Function to create the fetch request
 var getArtistName = () => {
   var nameField = document.getElementById('artistName').value;
   var result = document.getElementById('results');
@@ -9,12 +41,9 @@ var getArtistName = () => {
 
     thenable
       .then(result => result.json())
-      .then(result => (result))
+      .then(showResults)
       .then(result => console.log( data = result))
       .catch(error => console.error(error));
-
-
-      //document.body.textContent = data;
     }
 };
 
@@ -30,62 +59,3 @@ artistName.addEventListener('keypress', function (e) {
       getArtistName();
     }
 });
-
-function renderArtists(artistName) {
-  let element = [];
-  for (let i = 0; i < artistName.length; i++) {
-    const {name, popularity} = artistName[i];
-    const $artist = document.createElement('div');
-    const $name = document.createElement('p');
-    const $popularity = document.createElement('p');
-
-    $name.textContent = name;
-    $popularity.textContent = popularity;
-
-    $artist.appendChild($name);
-    $artist.appendChild($popularity);
-    elements.push($artists);
-  }
-  return element
-}
-
-for (let i = 0; i < artistName.length; i++) {
-  results.appendChild(renderArtists(artistName)[i]);
-}
-
-
-
-var thenable = fetch('/data');
-
-thenable
-  .then((result) => result.json())
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error))
-
-
-/*
-    var map = (collection, transform) => {
-      let obj = [];
-      for (let i = 0; i < collection.length; i++){
-      obj.push(renderDetails(collection[i]));
-      }
-      return obj;
-    }
-
-
-var renderDetails = (results) => {
-    var $items = document.createElement('div');
-    var $name = document.createElement('p');
-    var $genres = document.createElement('p');
-    var $popularity = document.createElement('p');
-
-    $name.textContent = name;
-    $genres.textContent = genres;
-    $popularity.textContent = popularity;
-
-    body.appendChild($items);
-    items.appendChild($name);
-    items.appendChild($genres);
-    items.appendChild($popularity);
-  };
-*/

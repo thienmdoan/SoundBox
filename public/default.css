@@ -23,13 +23,20 @@ body {
 }
 
 #results {
+  margin-top: 20px;
   text-align: center;
 }
 
-#footerImg {
-  text-align: center;
-  background-image: url("http://www.endlessicons.com/wp-content/uploads/2012/11/music-note-icon-614x460.png");
+.artistImg {
+  height: 200px;
   background-size: contain;
-  margin-top: 400px;
-  height: 100px;
+}
+
+.artistInfo {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#artistDeets {
+  position: relative;
 }
