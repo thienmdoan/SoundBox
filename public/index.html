@@ -7,10 +7,14 @@
   <body>
     <h1 id="title"> SoundBox</h1>
     <div id="searchbar">
-      <span>Artist: <input id="artist" value="name"></span>
-      <span><button id="submit">submit</button></span>
+      <form name="searchForm" method="GET">
+        <span> Artist:
+          <input id="artistName" type="text" name="name">
+        </span>
+        <button id="subButton" type="button">Submit</button>
+      </form>
     </div>
-    <div id="placeholder"></div>
+    <div id="results"></div>
     <audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg" autoplay>
       Your browser does not support the <code>audio</code> element.
     </audio>

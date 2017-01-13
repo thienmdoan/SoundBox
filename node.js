@@ -22,31 +22,9 @@ app.get('/artists/:name', (req,res) => {
 const search = req.params.name;
 const name = JSON.stringify(search);
    spotifyApi
-    .searchArtists(name,{ limit: 5, offset: 0 })
-    .then(data => console.log('Search artists', data.body.artists.items[0]))
-    .then(data => res.json(data))
-    res.json(data)
-    /*
-    var map = (collection, transform) => {
-      let obj = [];
-      for (let i = 0; i < collection.length; i++){
-      obj.push(transform(collection[i]));
-      }
-      return obj;
-    }
-    var $items = document.createElement('div');
-    var $name = document.createElement('p');
-    var $genres = document.createElement('p');
-    var $popularity = document.createElement('p');
-    $items.textContent = items;
-    $name.textContent = name;
-    $genres.textContent = genres;
-    $popularity.textContent = popularity;
-    body.appendChild($items);
-    items.appendChild($name);
-    items.appendChild($genres);
-    items.appendChild($popularity);
-    */
+    .searchArtists(name,{ limit: 3, offset: 0 })
+    .then(data => data.body.artists.items)
+    .then(data => res.json(data));
 });
 
 
