@@ -7,15 +7,20 @@ body {
 #title {
   font-size: 4em;
   text-align: center;
+  font-family: 'Bungee Shade', cursive;
 }
 
 #searchbar {
   font-size: 28px;
   text-align: center;
+  font-family: 'Monoton', cursive;
 }
 
 #subButton {
+  background-color: rgb(234,133,120);
   font-size: 20px;
+  font-family: 'Josefin Slab', serif;
+  color: white;
 }
 
 #artistName {
@@ -28,7 +33,7 @@ body {
 }
 
 .artistImg {
-  height: 200px;
+  height: 400px;
   background-size: contain;
 }
 
@@ -39,4 +44,7 @@ body {
 
 #artistDeets {
   position: relative;
+  font-size: 25px;
+  font-family: 'Poiret One', cursive;
+  font-weight: bold;
 }
