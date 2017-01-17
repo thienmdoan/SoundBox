@@ -50,7 +50,7 @@ var getArtistName = () => {
     thenable
       .then(result => result.json())
       .then(showResults)
-      .then(result => console.log( data = result))
+      .then(result => console.log(result))
       .catch(error => console.error(error));
     }
 };
