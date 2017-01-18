@@ -13,26 +13,29 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
-app.listen(3000, () => {
-  console.log('listening to port 3000');
+
+app.get('/artists/:name', (req, res) => {
+  const search = req.params.name;
+  const name = JSON.stringify(search);
+     spotifyApi
+      .searchArtists(name,{ limit: 3, offset: 0 })
+      .then(data => data.body.artists.items)
+      .then(data => res.json(data));
 });
 
 
-app.get('/artists/:name', (req,res) => {
-const search = req.params.name;
-const name = JSON.stringify(search);
-   spotifyApi
-    .searchArtists(name,{ limit: 5, offset: 0 })
-    .then(data => data.body.artists.items)
+app.get('/albums/:id', (req, res) => {
+  var id = req.params.id;
+  spotifyApi
+    .getArtistAlbums(id, { limit: 20, offset: 1 })
+    .then(data => data.body.items)
     .then(data => res.json(data));
+    //.then(data => console.log(data.body.items));
 });
 
 
-app.get('/data', (req, res) => {
-   res.json({ data: 'This is my Data'});
+ app.listen(3000, () => {
+   console.log('listening to port 3000');
  });
-
-
-
 
 //https://api.spotify.com/v1/search?query=phoenix&offset=0&limit=20&type=artist
