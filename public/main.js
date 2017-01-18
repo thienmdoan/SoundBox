@@ -150,17 +150,22 @@ var showTracks = (results) => {
     var $artistName = document.createElement('span');
     var $type = document.createElement('span');
     var $trackDetails = document.createElement('div');
+    var $audio = document.createElement('audio');
+    var $aSource = document.createElement('source');
     //var $img = document.createElement('img');
 
     $trackName.textContent = obj.name;
     $artistName.textContent = ' ' + obj.artists[0].name;
     $type.textContent = ' ' + obj.type.toUpperCase() + ' by: ';
 
-    $artist.setAttribute('class', 'artistInfo');
+    $artist.setAttribute('class', 'artistTrackInfo');
     $artist.setAttribute('id', 'removeList');
     $trackName.setAttribute('class', 'tName');
     $trackDetails.setAttribute('class', 'trackInfo');
     $artistName.setAttribute('class', 'trackArtist');
+    $audio.setAttribute('controls', 'controls');
+    $aSource.setAttribute('src', obj.preview_url);
+
     //$img.setAttribute('src', obj.images[0].url);
     //$img.setAttribute('class', 'artistImg');
 
@@ -170,6 +175,8 @@ var showTracks = (results) => {
     $trackDetails.appendChild($type);
     $trackDetails.appendChild($artistName);
     albumList.appendChild($artist);
+    $artist.appendChild($audio);
+    $audio.appendChild($aSource);
   }
   return results;
 };
