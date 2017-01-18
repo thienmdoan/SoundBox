@@ -18,7 +18,7 @@ app.get('/artists/:name', (req, res) => {
   const search = req.params.name;
   const name = JSON.stringify(search);
      spotifyApi
-      .searchArtists(name,{ limit: 3, offset: 0 })
+      .searchArtists(name,{ limit: 10, offset: 0 })
       .then(data => data.body.artists.items)
       .then(data => res.json(data))
       .catch(error => console.error(error));
