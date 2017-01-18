@@ -74,6 +74,7 @@ artistName.addEventListener('keypress', function (e) {
 var list = document.getElementById('list');
 var showID = list.addEventListener('click', myClick, false);
 
+var showAlTracks = list.addEventListener('click', userClick, false);
 
 function myClick() {
   if(event.target.id.length === 22) {
@@ -96,7 +97,8 @@ var showAlbums = (results) => {
   for (let i = 0; i < results.length; i ++) {
     var obj = results[i];
     var $artist = document.createElement('div');
-    var $albumName = document.createElement('div');
+    var $info = document.createElement('div')
+    var $albumName = document.createElement('p');
     var $artistName = document.createElement('p');
     var $type = document.createElement('p');
     var $img = document.createElement('img');
@@ -109,11 +111,64 @@ var showAlbums = (results) => {
     $artist.setAttribute('id', 'removeList');
     $img.setAttribute('src', obj.images[0].url);
     $img.setAttribute('class', 'artistImg');
+    $albumName.setAttribute('class', 'albumName');
+    $albumName.setAttribute('id', obj.id);
 
     $artist.appendChild($img);
-    $artist.appendChild($albumName);
-    $albumName.appendChild($type);
-    $albumName.appendChild($artistName);
+    $artist.appendChild($info);
+    $info.appendChild($albumName);
+    $info.appendChild($type);
+    $info.appendChild($artistName);
+    albumList.appendChild($artist);
+  }
+  return results;
+};
+
+
+function userClick() {
+  if(event.target.id.length === 22) {
+    const thenable = fetch('/tracks/' + event.target.id);
+    while (list.firstChild) {
+    list.removeChild(list.firstChild);
+  }
+    thenable
+      .then(result => result.json())
+      .then(showTracks)
+      .then(results => console.log(results))
+      .catch(error => console.error(error));
+    console.log(event.target.id);
+  }
+}
+
+var showTracks = (results) => {
+  var albumList = document.getElementById('list')
+
+  for (let i = 0; i < results.length; i ++) {
+    var obj = results[i];
+    var $artist = document.createElement('div');
+    var $trackName = document.createElement('span');
+    var $artistName = document.createElement('span');
+    var $type = document.createElement('span');
+    var $trackDetails = document.createElement('div');
+    //var $img = document.createElement('img');
+
+    $trackName.textContent = obj.name;
+    $artistName.textContent = ' ' + obj.artists[0].name;
+    $type.textContent = ' ' + obj.type.toUpperCase() + ' by: ';
+
+    $artist.setAttribute('class', 'artistInfo');
+    $artist.setAttribute('id', 'removeList');
+    $trackName.setAttribute('class', 'tName');
+    $trackDetails.setAttribute('class', 'trackInfo');
+    $artistName.setAttribute('class', 'trackArtist');
+    //$img.setAttribute('src', obj.images[0].url);
+    //$img.setAttribute('class', 'artistImg');
+
+    //$artist.appendChild($img);
+    $artist.appendChild($trackDetails);
+    $trackDetails.appendChild($trackName);
+    $trackDetails.appendChild($type);
+    $trackDetails.appendChild($artistName);
     albumList.appendChild($artist);
   }
   return results;
