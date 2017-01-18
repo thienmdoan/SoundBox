@@ -1,4 +1,3 @@
-
 //Function to create DOM elements for artist data.
 var showResults = (results) => {
   var resSearch = document.getElementById('list')
