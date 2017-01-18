@@ -1,0 +1,50 @@
+body {
+  position: relative;
+  font-family: Arial;
+  background-color: rgb(255,192,170);
+}
+
+#title {
+  font-size: 4em;
+  text-align: center;
+  font-family: 'bungee shade', cursive;
+}
+
+#searchbar {
+  font-size: 28px;
+  text-align: center;
+  font-family: 'monoton', cursive;
+}
+
+#subButton {
+  background-color: rgb(234,133,120);
+  font-size: 20px;
+  font-family: 'josefin slab', serif;
+  color: white;
+}
+
+#artistName {
+  font-size: 20px;
+}
+
+#results {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.artistImg {
+  height: 400px;
+  background-size: contain;
+}
+
+.artistInfo {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#artistDeets {
+  position: relative;
+  font-size: 25px;
+  font-family: 'poiret one', cursive;
+  font-weight: bold;
+}
