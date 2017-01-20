@@ -9,6 +9,7 @@ var showResults = (results) => {
       var $genres = document.createElement('p');
       var $img = document.createElement('img');
       var $artDeets = document.createElement('div');
+      var $recommend = document.createElement('p');
 
       $name.textContent = 'Artist : ' + obj.name;
       $popularity.textContent = 'Popularity : ' + obj.popularity;
@@ -20,11 +21,14 @@ var showResults = (results) => {
         genres = obj.genres[i];
       }
       $genres.textContent = 'Genre : ' + genres.toUpperCase();
+      $recommend.textContent = 'Similar Artists';
 
       $artist.setAttribute('class', 'artist-info');
       $artist.setAttribute('id', 'remove-list');
       $name.setAttribute('id', obj.id);
       $name.setAttribute('class', 'artist-name');
+      $recommend.setAttribute('class', 'recommend');
+      $recommend.setAttribute('id', obj.id);
 
       var img = '';
       if (obj.images[i] === undefined) {
@@ -42,6 +46,7 @@ var showResults = (results) => {
       $artDeets.appendChild($name);
       $artDeets.appendChild($popularity);
       $artDeets.appendChild($genres);
+      $artDeets.appendChild($recommend);
       resSearch.appendChild($artist);
   }
   return results;
@@ -196,7 +201,6 @@ document.addEventListener('play', function(e){
     }
 }, true);
 
-
 //Event listener for adding tracks to favorites
 list.addEventListener('click',function() {
   if(event.target.className == 'track-name') {
@@ -215,7 +219,23 @@ list.addEventListener('click',function() {
       .catch(error => console.error(error));
     console.log(event.target.id);
   }
+  else if(event.target.className == 'recommend') {
+    const thenable = fetch('/related/' + event.target.id);
+    var newList = document.getElementById('remove-list');
+    while (list.firstChild) {
+    list.removeChild(list.firstChild);
+    }
+    thenable
+      .then(results =>results.json())
+      .then(showResults)
+      .then(results => console.log(results))
+      .catch(error => console.error(error));
+  }
 }, false);
+
+
+
+
 /*
 var $main = document.getElementById('main')
 

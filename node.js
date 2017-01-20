@@ -33,7 +33,6 @@ app.get('/artists/:name', (req, res) => {
       .catch(error => console.error(error));
 });
 
-
 app.get('/albums/:id', (req, res) => {
   var id = req.params.id;
   spotifyApi
@@ -51,6 +50,31 @@ app.get('/tracks/:id', (req, res) => {
     .then(data => res.json(data))
     .catch(error => console.error(error));
 });
+
+
+app.get('/related/:id', (req, res) => {
+  var id = req.params.id;
+  spotifyApi
+    .getArtistRelatedArtists(id)
+    .then(data => data.body.artists)
+    .then(data => res.json(data))
+    .catch(error => console.error(error));
+});
+/*
+  spotifyApi.searchPlaylists('workout')
+    .then(function(data) {
+      console.log('Found playlists are', data.body);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+
+
+  spotifyApi.getUser('petteralexis')
+    .then(function(data) {
+      console.log('Some information about this user', data.body);
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
 
 /*
 app.get('/user', function(req, res) {
@@ -71,7 +95,3 @@ app.post('/user', function(req, res) {
 app.listen(PORT, function () {
   console.log('listening on port ' + PORT);
 });
-
-//https://api.spotify.com/v1/search?query=phoenix&offset=0&limit=20&type=artist
-
-//https://api.spotify.com/v1/albums/7iXImlGs9MxR7VTSNkO2Go/tracks
