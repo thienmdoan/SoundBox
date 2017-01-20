@@ -73,6 +73,7 @@ var getArtistName = () => {
       .catch(error => console.error(error));
     }
 };
+
 //Event listener for the submit button for the artist search.
 var subButton = document.getElementById('sub-button');
 subButton.addEventListener('click', getArtistName, false);
@@ -88,6 +89,7 @@ artistName.addEventListener('keypress', function (e) {
 //Event listener for when clicking on the artist to show album.
 var list = document.getElementById('list');
 var showID = list.addEventListener('click', nameSubmit, false);
+
 //Event listener for click on an album
 var showAlTracks = list.addEventListener('click', tracksRequest, false);
 //Saves the artist's name as a variable to send a get request for that item.
@@ -120,7 +122,7 @@ var showAlbums = (results) => {
 
     $albumName.textContent = obj.name;
     $artistName.textContent = 'Artist: ' + obj.artists[0].name;
-    $type.textContent = 'Type: ' + obj.album_type.toUpperCase();
+    $type.textContent = 'Type: ' + obj.album_type;//.toUpperCase();
 
     $artist.setAttribute('class', 'artist-info');
     $artist.setAttribute('id', 'remove-list');
@@ -138,6 +140,7 @@ var showAlbums = (results) => {
   }
   return results;
 };
+
 //Sends a request for the albums tracks.
 function tracksRequest() {
   if(event.target.className == "album-name"){
@@ -193,6 +196,7 @@ var showTracks = (results) => {
 };
 //Event listener for pause other tracks when another is played.
 document.addEventListener('play', function(e){
+
   var audios = document.getElementsByTagName('audio');
     for(var i = 0, len = audios.length; i < len;i++) {
       if(audios[i] != e.target){
