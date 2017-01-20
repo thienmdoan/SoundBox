@@ -1,7 +1,10 @@
+
 body {
   position: relative;
-  font-family: 'open sans', sans-serif;
+  font-family: 'expletus sans', cursive;
   background-color: rgb(255,192,170);
+  margin: 0;
+  padding: 0;
 }
 
 #title {
@@ -38,6 +41,7 @@ body {
 #results {
   margin-top: 20px;
   text-align: center;
+  color: white;
 }
 
 #list {
@@ -72,6 +76,7 @@ body {
 .artist-name:hover {
   text-shadow: 0px 0 15px #fff;
   cursor: pointer;
+  color: white;
 }
 
 .album-name {
@@ -83,6 +88,7 @@ body {
 .album-name:hover {
   text-shadow: 0px 0 15px #fff;
   cursor: pointer;
+  color: white;
 }
 
 .track-name {
@@ -103,4 +109,39 @@ body {
   font-weight: bold;
   -webkit-transition: all 0.7s ease;
   transition: all 0.7s ease;
+}
+
+.track-artist:hover {
+  cursor: pointer;
+  color: white;
+  text-shadow: 0px 0 15px #fff;
+}
+
+.artist-track-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#favorite {
+  font-family: 'monoton', cursive;
+  font-size: 20px;
+}
+
+#sbar {
+  font-family: 'monoton', cursive;
+  font-size: 20px;
+}
+
+.pview {
+  float: right;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+#fav-button {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
 }

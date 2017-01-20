@@ -2,10 +2,18 @@
 const express = require('express');
 const SpotifyWebApi = require("spotify-web-api-node");
 const bodyParser = require('body-parser');
+const knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host : 'localhost',
+    user : 'occs',
+    database: 'soundbox'
+  }
+});
 
 const spotifyApi = new SpotifyWebApi({
- clientId: "ae85dc567f624d11b90b2f3ccf5ed96f",
- clientSecret: "e1c7b305a8b64f21bca25dc0bfacd306",
+ clientId: process.env.MY_ID,
+ clientSecret: process.env.MY_SECRET_NUMBER,
  redirectUri: "http://www.example.com/callback"
 });
 
@@ -13,6 +21,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+var PORT = process.env.MY_PORT;
 
 app.get('/artists/:name', (req, res) => {
   const search = req.params.name;
@@ -43,9 +52,15 @@ app.get('/tracks/:id', (req, res) => {
     .catch(error => console.error(error));
 });
 
- app.listen(3000, () => {
-   console.log('listening to port 3000');
- });
+app.get('/users', (req, res) => {
+  const user = knex.select('name').from('users');
+  user
+    .then(name => res.json(name));
+});
+
+app.listen(PORT, function () {
+  console.log('listening on port ' + PORT);
+});
 
 //https://api.spotify.com/v1/search?query=phoenix&offset=0&limit=20&type=artist
 
