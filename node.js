@@ -52,12 +52,22 @@ app.get('/tracks/:id', (req, res) => {
     .catch(error => console.error(error));
 });
 
-app.get('/users', (req, res) => {
-  const user = knex.select('name').from('users');
-  user
-    .then(name => res.json(name));
+/*
+app.get('/user', function(req, res) {
+  var query = knex.select().from('users')
+  query
+    .then((users) => res.json(users));
 });
 
+app.post('/user', function(req, res) {
+  var query = knex('users').insert({
+    name: req.body.name,
+  });
+  query
+  .then((users) => res.json(users))
+  .catch((error) => console.log('Sorry, could not insert that user', error));
+});
+*/
 app.listen(PORT, function () {
   console.log('listening on port ' + PORT);
 });

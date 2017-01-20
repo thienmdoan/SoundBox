@@ -1,4 +1,3 @@
-
 //Function to create DOM elements for artist data.
 var showResults = (results) => {
   var resSearch = document.getElementById('list')
@@ -47,7 +46,6 @@ var showResults = (results) => {
   }
   return results;
 };
-
 //Function to create the fetch request
 var getArtistName = () => {
   var nameField = document.getElementById('artist-name').value;
@@ -70,11 +68,10 @@ var getArtistName = () => {
       .catch(error => console.error(error));
     }
 };
-
+//Event listener for the submit button for the artist search.
 var subButton = document.getElementById('sub-button');
 subButton.addEventListener('click', getArtistName, false);
-
-
+//Event listener for the enter button to search for artist.
 var artistName = document.querySelector('#artist-name');
 artistName.addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode;
@@ -83,15 +80,14 @@ artistName.addEventListener('keypress', function (e) {
       getArtistName();
   }
 });
-
-
+//Event listener for when clicking on the artist to show album.
 var list = document.getElementById('list');
 var showID = list.addEventListener('click', nameSubmit, false);
-
+//Event listener for click on an album
 var showAlTracks = list.addEventListener('click', tracksRequest, false);
-
+//Saves the artist's name as a variable to send a get request for that item.
 function nameSubmit() {
-  if(event.target.id.length === 22) {
+  if(event.target.className == "artist-name"){
     const thenable = fetch('/albums/' + event.target.id);
     while (list.firstChild) {
     list.removeChild(list.firstChild);
@@ -104,7 +100,7 @@ function nameSubmit() {
     console.log(event.target.id);
   }
 }
-
+//Renders albums by a selected artist.
 var showAlbums = (results) => {
   var albumList = document.getElementById('list')
 
@@ -137,10 +133,9 @@ var showAlbums = (results) => {
   }
   return results;
 };
-
-
+//Sends a request for the albums tracks.
 function tracksRequest() {
-  if(event.target.id.length === 22) {
+  if(event.target.className == "album-name"){
     const thenable = fetch('/tracks/' + event.target.id);
     while (list.firstChild) {
     list.removeChild(list.firstChild);
@@ -153,7 +148,7 @@ function tracksRequest() {
     console.log(event.target.id);
   }
 }
-
+//Renders tracks from selected album.
 var showTracks = (results) => {
   var albumList = document.getElementById('list')
 
@@ -166,24 +161,21 @@ var showTracks = (results) => {
     var $trackDetails = document.createElement('div');
     var $audio = document.createElement('audio');
     var $aSource = document.createElement('source');
-    //var $img = document.createElement('img');
 
     $trackName.textContent = obj.name;
     $artistName.textContent = ' ' + obj.artists[0].name;
-    $type.textContent = ' ' + obj.type.toUpperCase() + ' by: ';
+    $type.textContent = ' ' + obj.type + ' by: ';
 
     $artist.setAttribute('class', 'artist-track-info');
     $artist.setAttribute('id', 'remove-list');
     $trackName.setAttribute('class', 'track-name');
     $trackDetails.setAttribute('class', 'track-info');
     $artistName.setAttribute('class', 'track-artist');
+    $artistName.setAttribute('id', obj.artists[0].name);
     $audio.setAttribute('controls', 'controls');
     $aSource.setAttribute('src', obj.preview_url);
+    $trackName.setAttribute('id', obj.id);
 
-    //$img.setAttribute('src', obj.images[0].url);
-    //$img.setAttribute('class', 'artistImg');
-
-    //$artist.appendChild($img);
     $artist.appendChild($trackDetails);
     $trackDetails.appendChild($trackName);
     $trackDetails.appendChild($type);
@@ -194,3 +186,54 @@ var showTracks = (results) => {
   }
   return results;
 };
+//Event listener for pause other tracks when another is played.
+document.addEventListener('play', function(e){
+    var audios = document.getElementsByTagName('audio');
+    for(var i = 0, len = audios.length; i < len;i++){
+        if(audios[i] != e.target){
+            audios[i].pause();
+        }
+    }
+}, true);
+
+
+//Event listener for adding tracks to favorites
+list.addEventListener('click',function() {
+  if(event.target.className == 'track-name') {
+    console.log(event.target.id);
+  }
+  else if(event.target.className == 'track-artist') {
+    const thenable = fetch('/artists/' + event.target.id);
+    var newList = document.getElementById('remove-list');
+    while (list.firstChild) {
+    list.removeChild(list.firstChild);
+    }
+    thenable
+      .then(result => result.json())
+      .then(showResults)
+      .then(results => console.log(results))
+      .catch(error => console.error(error));
+    console.log(event.target.id);
+  }
+}, false);
+/*
+var $main = document.getElementById('main')
+
+function show(view, item) {
+  var $active = view.getElementsByClassName('active')[0]
+  $active.classList.add('hidden')
+  $active.classList.remove('active')
+  item.classList.remove('hidden')
+  item.classList.add('active')
+}
+
+var $navigation = document.getElementById('navigation')
+$navigation.addEventListener('click', function(event) {
+  if (event.target.tagName === 'BUTTON') {
+    var id = event.target.dataset.id
+    var $item = document.getElementById(id)
+    var $main = document.getElementById('main')
+    show($main, $item)
+  }
+})
+*/

@@ -2,18 +2,29 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="default.css">
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Monoton|Josefin+Slab|Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Monoton|Josefin+Slab|Open+Sans|Ewert|Expletus+Sans" rel="stylesheet">
     <title>Project 2 SOUNDBOX</title>
   </head>
   <body>
     <h1 id="title"> SoundBox</h1>
-    <div id="searchbar">
-      <form name="search-form" method="GET">
-        <span> Artist:
-          <input id="artist-name" type="text" name="name">
-        </span>
-        <button id="sub-button" type="button">Submit</button>
-      </form>
+    <!--
+    <div id="navigation">
+      <button data-id="fav-button" id="favorite" class="pview">Favorites</button>
+      <button data-id="searchbar" id="sbar" class="pview">Search</button>
+    </div>
+  -->
+    <div id="main">
+      <div id="fav-button" class="hidden">
+        <h2>Favorites</h2>
+      </div>
+      <div id="searchbar" class="active">
+        <form name="search-form" method="GET">
+          <span> Artist:
+            <input id="artist-name" type="text" name="name">
+          </span>
+          <button id="sub-button" type="button">Submit</button>
+        </form>
+      </div>
     </div>
     <div id="results"></div>
     <div id="list">
