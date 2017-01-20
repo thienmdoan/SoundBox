@@ -61,6 +61,6 @@ app.get('/related/:id', (req, res) => {
     .catch(error => console.error(error));
 });
 
-app.listen(PORT, function () {
+app.listen(PORT || 3000, function () {
   console.log('listening on port ' + PORT);
 });
