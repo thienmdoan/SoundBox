@@ -6,6 +6,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "knex": "^0.12.6",
+    "pg": "^6.1.2",
     "spotify-web-api-node": "^2.3.6"
   },
   "devDependencies": {
@@ -13,7 +15,10 @@
   },
   "scripts": {
     "start": "node .",
-    "watch": "nodemon ."
+    "watch": "nodemon .",
+    "migrate:make": "knex migrate:make",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback"
   },
   "repository": {
     "type": "git",

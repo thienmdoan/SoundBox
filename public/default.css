@@ -62,8 +62,8 @@ body {
   text-align: center;
   border-bottom: 1px black solid;
   border-spacing: 100px;
-  margin-right: 25%;
-  margin-left: 25%;
+  margin-right: 30%;
+  margin-left: 30%;
   font-weight: bold;
 }
 
@@ -122,26 +122,14 @@ body {
   margin-top: 10px;
 }
 
-#favorite {
-  font-family: 'monoton', cursive;
+.recommend {
+  border: 1px black solid;
+  background-color: rgb(234,133,120);
+  font-family: 'permanent marker', cursive;
   font-size: 20px;
 }
 
-#sbar {
-  font-family: 'monoton', cursive;
-  font-size: 20px;
-}
-
-.pview {
-  float: right;
-  margin-bottom: 20px;
-  display: inline-block;
-}
-
-#fav-button {
-  text-align: center;
-}
-
-.hidden {
-  display: none;
+.recommend:hover {
+  cursor: pointer;
+  transform: scale(1.01);
 }

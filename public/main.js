@@ -9,6 +9,7 @@ var showResults = (results) => {
       var $genres = document.createElement('p');
       var $img = document.createElement('img');
       var $artDeets = document.createElement('div');
+      var $recommend = document.createElement('p');
 
       $name.textContent = 'Artist : ' + obj.name;
       $popularity.textContent = 'Popularity : ' + obj.popularity;
@@ -20,11 +21,14 @@ var showResults = (results) => {
         genres = obj.genres[i];
       }
       $genres.textContent = 'Genre : ' + genres.toUpperCase();
+      $recommend.textContent = 'Similar Artists';
 
       $artist.setAttribute('class', 'artist-info');
       $artist.setAttribute('id', 'remove-list');
       $name.setAttribute('id', obj.id);
       $name.setAttribute('class', 'artist-name');
+      $recommend.setAttribute('class', 'recommend');
+      $recommend.setAttribute('id', obj.id);
 
       var img = '';
       if (obj.images[i] === undefined) {
@@ -42,6 +46,7 @@ var showResults = (results) => {
       $artDeets.appendChild($name);
       $artDeets.appendChild($popularity);
       $artDeets.appendChild($genres);
+      $artDeets.appendChild($recommend);
       resSearch.appendChild($artist);
   }
   return results;
@@ -191,16 +196,15 @@ var showTracks = (results) => {
 };
 //Event listener for pause other tracks when another is played.
 document.addEventListener('play', function(e){
-    var audios = document.getElementsByTagName('audio');
-    for(var i = 0, len = audios.length; i < len;i++){
-        if(audios[i] != e.target){
-            audios[i].pause();
-        }
+
+  var audios = document.getElementsByTagName('audio');
+    for(var i = 0, len = audios.length; i < len;i++) {
+      if(audios[i] != e.target){
+        audios[i].pause();
     }
+  }
 }, true);
-
-
-//Event listener for adding tracks to favorites and seaching for
+//Event listener for adding tracks to favorites
 list.addEventListener('click',function() {
   if(event.target.className == 'track-name') {
     console.log(event.target.id);
@@ -218,27 +222,16 @@ list.addEventListener('click',function() {
       .catch(error => console.error(error));
     console.log(event.target.id);
   }
-}, false);
-
-
-/*
-var $main = document.getElementById('main')
-
-function show(view, item) {
-  var $active = view.getElementsByClassName('active')[0]
-  $active.classList.add('hidden')
-  $active.classList.remove('active')
-  item.classList.remove('hidden')
-  item.classList.add('active')
-}
-
-var $navigation = document.getElementById('navigation')
-$navigation.addEventListener('click', function(event) {
-  if (event.target.tagName === 'BUTTON') {
-    var id = event.target.dataset.id
-    var $item = document.getElementById(id)
-    var $main = document.getElementById('main')
-    show($main, $item)
+  else if(event.target.className == 'recommend') {
+    const thenable = fetch('/related/' + event.target.id);
+    var newList = document.getElementById('remove-list');
+    while (list.firstChild) {
+    list.removeChild(list.firstChild);
+    }
+    thenable
+      .then(results =>results.json())
+      .then(showResults)
+      .then(results => console.log(results))
+      .catch(error => console.error(error));
   }
-})
-*/
+}, false);

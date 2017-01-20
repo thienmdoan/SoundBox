@@ -33,7 +33,6 @@ app.get('/artists/:name', (req, res) => {
       .catch(error => console.error(error));
 });
 
-
 app.get('/albums/:id', (req, res) => {
   var id = req.params.id;
   spotifyApi
@@ -52,16 +51,16 @@ app.get('/tracks/:id', (req, res) => {
     .catch(error => console.error(error));
 });
 
-app.get('/users', (req, res) => {
-  const user = knex.select('name').from('users');
-  user
-    .then(name => res.json(name));
+
+app.get('/related/:id', (req, res) => {
+  var id = req.params.id;
+  spotifyApi
+    .getArtistRelatedArtists(id)
+    .then(data => data.body.artists)
+    .then(data => res.json(data))
+    .catch(error => console.error(error));
 });
 
-app.listen(PORT, function () {
+app.listen(PORT || 3000, function () {
   console.log('listening on port ' + PORT);
 });
-
-//https://api.spotify.com/v1/search?query=phoenix&offset=0&limit=20&type=artist
-
-//https://api.spotify.com/v1/albums/7iXImlGs9MxR7VTSNkO2Go/tracks
