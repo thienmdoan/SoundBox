@@ -171,6 +171,7 @@ var showTracks = (results) => {
     $trackName.setAttribute('class', 'track-name');
     $trackDetails.setAttribute('class', 'track-info');
     $artistName.setAttribute('class', 'track-artist');
+    $artistName.setAttribute('id', obj.artists[0].name);
     $audio.setAttribute('controls', 'controls');
     $aSource.setAttribute('src', obj.preview_url);
     $trackName.setAttribute('id', obj.id);
@@ -195,7 +196,46 @@ document.addEventListener('play', function(e){
     }
 }, true);
 
+
+//Event listener for adding tracks to favorites and seaching for
 list.addEventListener('click',function() {
-if(event.target.className == 'track-name') {
-console.log(event.target.id);
-}}, false);
+  if(event.target.className == 'track-name') {
+    console.log(event.target.id);
+  }
+  else if(event.target.className == 'track-artist') {
+    const thenable = fetch('/artists/' + event.target.id);
+    var newList = document.getElementById('remove-list');
+    while (list.firstChild) {
+    list.removeChild(list.firstChild);
+    }
+    thenable
+      .then(result => result.json())
+      .then(showResults)
+      .then(results => console.log(results))
+      .catch(error => console.error(error));
+    console.log(event.target.id);
+  }
+}, false);
+
+
+/*
+var $main = document.getElementById('main')
+
+function show(view, item) {
+  var $active = view.getElementsByClassName('active')[0]
+  $active.classList.add('hidden')
+  $active.classList.remove('active')
+  item.classList.remove('hidden')
+  item.classList.add('active')
+}
+
+var $navigation = document.getElementById('navigation')
+$navigation.addEventListener('click', function(event) {
+  if (event.target.tagName === 'BUTTON') {
+    var id = event.target.dataset.id
+    var $item = document.getElementById(id)
+    var $main = document.getElementById('main')
+    show($main, $item)
+  }
+})
+*/
