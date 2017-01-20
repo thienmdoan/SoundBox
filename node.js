@@ -60,38 +60,7 @@ app.get('/related/:id', (req, res) => {
     .then(data => res.json(data))
     .catch(error => console.error(error));
 });
-/*
-  spotifyApi.searchPlaylists('workout')
-    .then(function(data) {
-      console.log('Found playlists are', data.body);
-    }, function(err) {
-      console.log('Something went wrong!', err);
-    });
 
-
-  spotifyApi.getUser('petteralexis')
-    .then(function(data) {
-      console.log('Some information about this user', data.body);
-    }, function(err) {
-      console.log('Something went wrong!', err);
-    });
-
-/*
-app.get('/user', function(req, res) {
-  var query = knex.select().from('users')
-  query
-    .then((users) => res.json(users));
-});
-
-app.post('/user', function(req, res) {
-  var query = knex('users').insert({
-    name: req.body.name,
-  });
-  query
-  .then((users) => res.json(users))
-  .catch((error) => console.log('Sorry, could not insert that user', error));
-});
-*/
 app.listen(PORT, function () {
   console.log('listening on port ' + PORT);
 });

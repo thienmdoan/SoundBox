@@ -121,30 +121,6 @@ body {
   margin-top: 10px;
 }
 
-#favorite {
-  font-family: 'monoton', cursive;
-  font-size: 20px;
-}
-
-#sbar {
-  font-family: 'monoton', cursive;
-  font-size: 20px;
-}
-
-.pview {
-  float: right;
-  margin-bottom: 20px;
-  display: inline-block;
-}
-
-#fav-button {
-  text-align: center;
-}
-
-.hidden {
-  display: none;
-}
-
 .recommend {
   border: 1px black solid;
   background-color: rgb(234,133,120);
