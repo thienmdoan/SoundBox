@@ -193,14 +193,13 @@ var showTracks = (results) => {
 };
 //Event listener for pause other tracks when another is played.
 document.addEventListener('play', function(e){
-    var audios = document.getElementsByTagName('audio');
-    for(var i = 0, len = audios.length; i < len;i++){
-        if(audios[i] != e.target){
-            audios[i].pause();
-        }
+  var audios = document.getElementsByTagName('audio');
+    for(var i = 0, len = audios.length; i < len;i++) {
+      if(audios[i] != e.target){
+        audios[i].pause();
     }
+  }
 }, true);
-
 //Event listener for adding tracks to favorites
 list.addEventListener('click',function() {
   if(event.target.className == 'track-name') {
@@ -232,28 +231,3 @@ list.addEventListener('click',function() {
       .catch(error => console.error(error));
   }
 }, false);
-
-
-
-
-/*
-var $main = document.getElementById('main')
-
-function show(view, item) {
-  var $active = view.getElementsByClassName('active')[0]
-  $active.classList.add('hidden')
-  $active.classList.remove('active')
-  item.classList.remove('hidden')
-  item.classList.add('active')
-}
-
-var $navigation = document.getElementById('navigation')
-$navigation.addEventListener('click', function(event) {
-  if (event.target.tagName === 'BUTTON') {
-    var id = event.target.dataset.id
-    var $item = document.getElementById(id)
-    var $main = document.getElementById('main')
-    show($main, $item)
-  }
-})
-*/
